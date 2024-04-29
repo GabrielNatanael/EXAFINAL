@@ -7,7 +7,10 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
 
-    [SerializeField] float moveSpeed;
+    private float moveSpeed;
+
+    [SerializeField] float walkSpeed;
+    [SerializeField] float sprintSpeed;
 
     [SerializeField] float groundDrag;
 
@@ -15,11 +18,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float jumpCooldown;
     [SerializeField] float airMultiplier;
 
-    bool readyToJump;
+    bool readyToJump = true;
 
     [Header("Keybinds")]
 
-    public KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode jumpKey = KeyCode.Space;
+    [SerializeField] KeyCode sprintKey = KeyCode.LeftShift;
 
     [Header("GroundCheck")]
 
@@ -27,6 +31,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask whatIsGround;
 
     bool isGrounded;
+
+    [Header("SlopeHandling")]
+    [SerializeField] float maxSlopeAngle;
+
+    private RaycastHit slopeHit;
 
     [SerializeField] Transform oriantation;
 
@@ -37,6 +46,13 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
+    public MovementState state;
+    public enum MovementState
+    {
+        walking,
+        sprinting,
+        air
+    }
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,6 +63,8 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
 
         MyInput();
+        SpeedControl();
+        StateHandler();
 
         if (isGrounded)
         {
@@ -76,9 +94,30 @@ public class PlayerMovement : MonoBehaviour
             Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
+    private void StateHandler()
+    {
+        if (isGrounded && Input.GetKey(sprintKey))
+        {
+            state = MovementState.sprinting;
+            moveSpeed = sprintSpeed;
+        }
+        else if (isGrounded)
+        {
+            state = MovementState.walking;
+            moveSpeed = walkSpeed;
+        }
+        else
+        {
+            state = MovementState.air;
+        }
+    }
     private void MovePlayer()
     {
         moveDirection = oriantation.forward * verticalInput + oriantation.right * horizontalInput;
+        if (OnSlope())
+        {
+            rb.AddForce(GetSlopeMoveDirection() * moveSpeed * 20f, ForceMode.Force);
+        }
 
         if (isGrounded)
         {
@@ -88,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
-
+        rb.useGravity = !OnSlope();
     }
 
     private void SpeedControl()
@@ -110,5 +149,18 @@ public class PlayerMovement : MonoBehaviour
     private void ResetJump()
     {
         readyToJump = true;
+    }
+    private bool OnSlope()
+    {
+        if(Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight * 0.5f + 0.3f))
+        {
+            float angle = Vector3.Angle(Vector3.up, slopeHit.normal);
+            return angle > maxSlopeAngle && angle != 0f;
+        }
+        return false;
+    }
+    private Vector3 GetSlopeMoveDirection()
+    {
+        return Vector3.ProjectOnPlane(moveDirection, slopeHit.normal).normalized;
     }
 }
