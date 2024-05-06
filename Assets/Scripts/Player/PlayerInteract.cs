@@ -24,8 +24,13 @@ public class PlayerInteract : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * distance);
 
         RaycastHit hitInfo;
-        if(Physics.Raycast(ray, out hitInfo, distance, mask))
+        if(Physics.Raycast(ray, out hitInfo, distance))
         {
+            if(hitInfo.collider.GetComponent<Interactables>() == null)
+            {
+                return;
+            }
+
             if(hitInfo.collider.GetComponent<Interactables>() != null)
             {
                 Interactables interactables = hitInfo.collider.GetComponent<Interactables>();
