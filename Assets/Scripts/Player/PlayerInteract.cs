@@ -7,13 +7,12 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] float distance = 3f;
     [SerializeField] LayerMask mask;
 
-    private Camera cam;
+    [SerializeField] Camera cam;
     private PlayerUI playerUI;
 
 
     private void Start()
     {
-        cam = GetComponentInChildren<Camera>();
         playerUI = GetComponent<PlayerUI>();
     }
     private void Update()
@@ -24,6 +23,7 @@ public class PlayerInteract : MonoBehaviour
         Debug.DrawRay(ray.origin, ray.direction * distance);
 
         RaycastHit hitInfo;
+
         if(Physics.Raycast(ray, out hitInfo, distance))
         {
             if(hitInfo.collider.GetComponent<Interactables>() == null)
