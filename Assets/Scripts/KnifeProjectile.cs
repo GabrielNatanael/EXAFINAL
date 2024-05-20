@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class KnifeProjectile : MonoBehaviour
 {
+    [Header("Knife Settings")]
     [SerializeField] float knifeSpeed = 10f;
     [SerializeField] Transform particleEffect = null;
     private Rigidbody rb;

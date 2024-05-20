@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PlayerInteract : MonoBehaviour
 {
+    [Header("Raycast")]
     [SerializeField] float distance = 3f;
     [SerializeField] LayerMask mask;
-
+    [Header("Camera")]
     [SerializeField] Camera cam;
     private PlayerUI playerUI;
 

@@ -5,6 +5,7 @@ using TMPro;
 
 public class PlayerUI : MonoBehaviour
 {
+    [Header("Interact Text")]
     [SerializeField] TextMeshProUGUI promptText;
 
     public void UpdateText(string promptMessage)

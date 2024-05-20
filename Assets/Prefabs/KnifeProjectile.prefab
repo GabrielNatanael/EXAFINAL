@@ -95,7 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d623822e840a7644bbf1e6113976442, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knifeSpeed: 15
+  knifeSpeed: 40
   particleEffect: {fileID: 8982786893660528235, guid: 140e79217f0748e48aa0a7991e2baddd, type: 3}
 --- !u!1 &4278617798413374747
 GameObject:

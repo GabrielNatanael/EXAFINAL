@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Movement")]
-
     private float moveSpeed;
+
+    [Header("Movement")]
 
     [SerializeField] float walkSpeed;
     [SerializeField] float sprintSpeed;

@@ -6,8 +6,10 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
+    [Header("Health")]
     [SerializeField] float maxHealth = 100f;
     [SerializeField] float chipSpeed = 2f;
+    [Header("Health Bar UI")]
     [SerializeField] Image frontHealthBar;
     [SerializeField] Image backHealthBar;
 

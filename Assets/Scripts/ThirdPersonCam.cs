@@ -10,10 +10,10 @@ public class ThirdPersonCam : MonoBehaviour
     [SerializeField] Transform playerObj;
     [SerializeField] Rigidbody rb;
     [SerializeField] Transform combatLookAt;
-
+    [Header("Cameras")]
     [SerializeField] GameObject thirdPersonCam;
     [SerializeField] GameObject combatCam;
-
+    [Header("Sensitivity")]
     [SerializeField] float rotationSpeed;
 
     public CameraStyle currentStyle;
