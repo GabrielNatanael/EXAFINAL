@@ -8,7 +8,7 @@ public class MeleeController : MonoBehaviour
     [SerializeField] float attackDistance = 3f;
     [SerializeField] float attackDelay = 0.4f;
     [SerializeField] float attackSpeed = 1f;
-    [SerializeField] int attackDamage = 0;
+    //[SerializeField] int attackDamage = 0;
     [SerializeField] LayerMask attackLayer;
     [SerializeField] KeyCode meleeAttackKey = KeyCode.Q;
 
