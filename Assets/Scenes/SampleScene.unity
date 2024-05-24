@@ -148,7 +148,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11249738}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.20307136, y: -0.0000000084239336, z: -0.0000000017470617, w: 0.97916394}
+  m_LocalRotation: {x: -0.20307136, y: 0.0000000084239336, z: 0.0000000017470617, w: 0.97916394}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -969,7 +969,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 284726319}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2669336, y: -3.4238033e-15, z: -1.836517e-15, w: 0.96371496}
+  m_LocalRotation: {x: -0.26693356, y: 0.000000028720944, z: 0.00000000795524, w: 0.96371496}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2483,11 +2483,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   promptMessage: Use Keypad
   door: {fileID: 240501159}
---- !u!95 &1352393094 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6335192077554365262, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-  m_PrefabInstance: {fileID: 5207503857616891744}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1542884052
 GameObject:
   m_ObjectHideFlags: 0
@@ -2529,11 +2524,6 @@ RectTransform:
 --- !u!4 &1626678089 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1537845698135574994, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-  m_PrefabInstance: {fileID: 5207503857616891744}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1653180133 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 2730084508867499048, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
   m_PrefabInstance: {fileID: 5207503857616891744}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1656945752
@@ -3504,10 +3494,6 @@ PrefabInstance:
       propertyPath: frontHealthBar
       value: 
       objectReference: {fileID: 73215177}
-    - target: {fileID: 3818166180400157215, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4023190505309904553, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
       propertyPath: promptText
       value: 
@@ -3520,14 +3506,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 2137023500}
-    - target: {fileID: 4321127271317301204, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-      propertyPath: fistAnim
-      value: 
-      objectReference: {fileID: 1653180133}
-    - target: {fileID: 4321127271317301204, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-      propertyPath: pistolAnim
-      value: 
-      objectReference: {fileID: 1352393094}
     - target: {fileID: 4321127271317301204, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
       propertyPath: debugTransformPunch
       value: 
@@ -3578,13 +3556,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7786723731094943888, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8195679054354600340, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
       propertyPath: cam
       value: 
       objectReference: {fileID: 2137023500}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3335977472774332567, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
+    - {fileID: 8235343478756325650, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
