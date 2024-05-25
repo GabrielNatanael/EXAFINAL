@@ -65,6 +65,10 @@ public class ShooterController : MonoBehaviour
                 Instantiate(ShootEffect, hitInfo.point, Quaternion.identity);
                 pistolAnim.SetTrigger("GunFired");
             }
+            if (hitInfo.collider.CompareTag("Dummy"))
+            {
+                hitInfo.collider.gameObject.GetComponent<Dummy>().Attacked();
+            }
         }
         if (Input.GetKeyDown(punchKey))
         {
