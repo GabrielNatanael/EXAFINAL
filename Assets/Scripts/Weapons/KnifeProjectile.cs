@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class KnifeProjectile : MonoBehaviour
@@ -20,6 +21,10 @@ public class KnifeProjectile : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Dummy"))
+        {
+            other.gameObject.GetComponent<Dummy>().DummyExplode();
+        }
         Instantiate(particleEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

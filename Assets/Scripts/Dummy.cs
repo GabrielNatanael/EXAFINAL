@@ -31,10 +31,22 @@ public class Dummy : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
     }
-    public void Attacked()
+    public void DummyShot()
     {
         anim.SetTrigger("AttackTrigger");
         float randomDamage = Random.Range(5, 20);
+        TakeDummyDamage(randomDamage);
+    }
+    public void DummyPunched()
+    {
+        anim.SetTrigger("AttackTrigger");
+        float randomDamage = Random.Range(5, 10);
+        TakeDummyDamage(randomDamage);
+    }
+    public void DummyExplode()
+    {
+        anim.SetTrigger("AttackTrigger");
+        float randomDamage = Random.Range(20, 40);
         TakeDummyDamage(randomDamage);
     }
     void UpdateHealthUI()

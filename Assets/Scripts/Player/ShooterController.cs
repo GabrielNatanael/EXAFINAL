@@ -67,7 +67,7 @@ public class ShooterController : MonoBehaviour
             }
             if (hitInfo.collider.CompareTag("Dummy"))
             {
-                hitInfo.collider.gameObject.GetComponent<Dummy>().Attacked();
+                hitInfo.collider.gameObject.GetComponent<Dummy>().DummyShot();
             }
         }
         if (Input.GetKeyDown(punchKey))
@@ -80,7 +80,11 @@ public class ShooterController : MonoBehaviour
             {
                 Instantiate(PunchEffect, punchHitInfo.point, Quaternion.identity);
                 fistAnim.SetTrigger("PunchTrigger");
-            }           
+            }
+            if (punchHitInfo.collider.CompareTag("Dummy"))
+            {
+                punchHitInfo.collider.gameObject.GetComponent<Dummy>().DummyPunched();
+            }
         }
     }
 }
