@@ -453,7 +453,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6273803351874463168
 Transform:
   m_ObjectHideFlags: 0
@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 4023190505309904553}
   - component: {fileID: 236739211618940750}
   - component: {fileID: 8195679054354600340}
-  - component: {fileID: 4321127271317301204}
+  - component: {fileID: 6644040221860207061}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -856,7 +856,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   cam: {fileID: 0}
---- !u!114 &4321127271317301204
+--- !u!114 &6644040221860207061
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -865,7 +865,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4080269587081506235}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3095f8ab9025a8b4e944cd612075126b, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a2d582f50d14a44388d789682b30069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
@@ -883,13 +883,21 @@ MonoBehaviour:
   PunchHitBox: {fileID: 1036278585809814623}
   punchDistance: 10
   PunchEffect: {fileID: 8982786893660528235, guid: 9a2ec04ae28a9834582eaf1130f0f5b0, type: 3}
-  punchCooldown: 0.5
+  punchCooldown: 0.2
+  comboResetTime: 0.8
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  groundCheckDistance: 1.1
+  airAttackFallMultiplier: 0.01
   switchKnifeThrowKey: 51
   switchShootKey: 50
   SwitchPunchKey: 49
   attackKey: 323
   pistolAnim: {fileID: 6335192077554365262}
   fistAnim: {fileID: 2730084508867499048}
+  advancedShootEffect: {fileID: 8982786893660528235, guid: ed8c08a429bd21d4c9189cad7218b65b, type: 3}
+  advancedPistolFireRate: 0.2
 --- !u!1 &4523432332862978109
 GameObject:
   m_ObjectHideFlags: 0

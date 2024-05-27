@@ -2959,18 +2959,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4321127271317301204, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-      propertyPath: cam
-      value: 
-      objectReference: {fileID: 2137023500}
-    - target: {fileID: 4321127271317301204, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-      propertyPath: debugTransformPunch
-      value: 
-      objectReference: {fileID: 829625292}
-    - target: {fileID: 4321127271317301204, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
-      propertyPath: debugTransformShoot
-      value: 
-      objectReference: {fileID: 639286890}
     - target: {fileID: 6039699553244395403, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.5
@@ -3011,6 +2999,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6644040221860207061, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
+      propertyPath: cam
+      value: 
+      objectReference: {fileID: 2137023500}
+    - target: {fileID: 6644040221860207061, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
+      propertyPath: debugTransformPunch
+      value: 
+      objectReference: {fileID: 829625292}
+    - target: {fileID: 6644040221860207061, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
+      propertyPath: debugTransformShoot
+      value: 
+      objectReference: {fileID: 639286890}
     - target: {fileID: 8195679054354600340, guid: 32f49d8391869e344b8aaccf474e7c0e, type: 3}
       propertyPath: cam
       value: 

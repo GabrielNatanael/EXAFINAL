@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using System.Runtime.InteropServices;
 using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.Animations;
@@ -8,46 +9,56 @@ using UnityEngine.Animations;
 public class ShooterController : MonoBehaviour
 {
     [Header("Camera")]
-    [SerializeField] Camera cam;
-    [SerializeField] LayerMask mouseColliderMask;
+    [SerializeField] protected Camera cam;
+    [SerializeField] protected LayerMask mouseColliderMask;
     [Header("Weapons Aim")]
-    [SerializeField] Transform debugTransformShoot;
-    [SerializeField] Transform debugTransformPunch;
-    [SerializeField] Transform knifeProjectilePrefab;
-    [SerializeField] Transform spawnProjectilePos;
-    [SerializeField] Transform ShootEffect = null;
+    [SerializeField] protected Transform debugTransformShoot;
+    [SerializeField] protected Transform debugTransformPunch;
+    [SerializeField] protected Transform knifeProjectilePrefab;
+    [SerializeField] protected Transform spawnProjectilePos;
+    [SerializeField] protected Transform ShootEffect = null;
     [Header("Weapons")]
-    [SerializeField] GameObject Pistol;
-    [SerializeField] GameObject KnifeLauncher;
-    [SerializeField] GameObject Fists;
-    [SerializeField] GameObject PunchHitBox;
+    [SerializeField] protected GameObject Pistol;
+    [SerializeField] protected GameObject KnifeLauncher;
+    [SerializeField] protected GameObject Fists;
+    [SerializeField] protected GameObject PunchHitBox;
     [Header("Melee")]
-    [SerializeField] float punchDistance = 3;
-    [SerializeField] Transform PunchEffect;
-    [SerializeField] float punchCooldown;
+    [SerializeField] protected float punchDistance = 3;
+    [SerializeField] protected  Transform PunchEffect;
+    [SerializeField] protected float punchCooldown;
+    [SerializeField] protected float comboResetTime = 1.5f;
+    [Header("Airborne Detection")]
+    [SerializeField] protected LayerMask groundLayer;
+    [SerializeField] protected float groundCheckDistance = 0.1f;
+    [SerializeField] protected float airAttackFallMultiplier = 0.5f;
     [Header("KeyCodes")]
-    [SerializeField] KeyCode switchKnifeThrowKey = KeyCode.Alpha3;
-    [SerializeField] KeyCode switchShootKey = KeyCode.Alpha2;
-    [SerializeField] KeyCode SwitchPunchKey = KeyCode.Alpha1;
-    [SerializeField] KeyCode attackKey = KeyCode.Mouse0;
+    [SerializeField] protected KeyCode switchKnifeThrowKey = KeyCode.Alpha3;
+    [SerializeField] protected KeyCode switchShootKey = KeyCode.Alpha2;
+    [SerializeField] protected KeyCode SwitchPunchKey = KeyCode.Alpha1;
+    [SerializeField] protected KeyCode attackKey = KeyCode.Mouse0;
     [Header("Animators")]
-    [SerializeField] Animator pistolAnim=null;
-    [SerializeField] Animator fistAnim=null;
+    [SerializeField] protected Animator pistolAnim=null;
+    [SerializeField] protected Animator fistAnim=null;
 
-    bool canPunch;
+    protected bool canPunch;
+    protected int punchComboIndex = 0;
+    protected int airPunchComboIndex = 0;
+    protected float lastPunchTime;
 
-    Collider punchCollider;
+    protected Collider punchCollider;
+    protected Rigidbody rb;
 
-    enum EquippedWeapon { Fists, pistol, knifeLauncher}
-    EquippedWeapon currentWeapon = EquippedWeapon.Fists;
+    protected enum EquippedWeapon { Fists, pistol, knifeLauncher}
+    protected EquippedWeapon currentWeapon = EquippedWeapon.Fists;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         SwitchWeapon(EquippedWeapon.Fists);
         canPunch = true;
         punchCollider = PunchHitBox.GetComponent<Collider>();
+        rb = GetComponent<Rigidbody>();
     }
-    private void Update()
+    protected virtual void Update()
     {
         Ray ray = new Ray(cam.transform.position, cam.transform.forward);
         RaycastHit hitInfo;
@@ -72,8 +83,7 @@ public class ShooterController : MonoBehaviour
 
         if (Input.GetKeyDown(attackKey)&&currentWeapon == EquippedWeapon.Fists&&canPunch)
         {
-            Punch();
-            fistAnim.SetTrigger("PunchTrigger");
+            PerformPunch();
             StartCoroutine(PunchCooldown());
         }
 
@@ -86,15 +96,61 @@ public class ShooterController : MonoBehaviour
         {
             KnifeLaunch(hitInfo);
         }
+        if(Time.time - lastPunchTime > comboResetTime)
+        {
+            punchComboIndex = 0;
+            airPunchComboIndex = 0;
+        }
     }
-    void SwitchWeapon(EquippedWeapon weapon)
+    protected virtual void SwitchWeapon(EquippedWeapon weapon)
     {
         Pistol.SetActive(weapon == EquippedWeapon.pistol);
         Fists.SetActive(weapon == EquippedWeapon.Fists);
         KnifeLauncher.SetActive(weapon == EquippedWeapon.knifeLauncher);
         currentWeapon = weapon;
     }
-    void Punch()
+    protected virtual void PerformPunch()
+    {
+        canPunch = false;
+        lastPunchTime = Time.time;
+
+        if(IsGrounded())
+        {
+            if (punchComboIndex == 0)
+            {
+                fistAnim.SetTrigger("punchTrigger1");
+            }
+            else if (punchComboIndex == 1)
+            {
+                fistAnim.SetTrigger("punchTrigger2");
+            }
+            else if (punchComboIndex == 2)
+            {
+                fistAnim.SetTrigger("punchTrigger3");
+            }
+            punchComboIndex = (punchComboIndex + 1) % 3;
+            Punch();
+        }
+        else
+        {
+            if (airPunchComboIndex == 0)
+            {
+                fistAnim.SetTrigger("airPunchTrigger1");
+            }
+            else if (airPunchComboIndex == 1)
+            {
+                fistAnim.SetTrigger("airPunchTrigger2");
+            }
+            else if (airPunchComboIndex == 2)
+            {
+                fistAnim.SetTrigger("airPunchTrigger3");
+            }
+            airPunchComboIndex = (airPunchComboIndex + 1) % 3;
+            Punch();
+            SlowFall();
+        }
+    }
+    protected virtual void Punch()
     {
         RaycastHit punchHitInfo;
 
@@ -115,7 +171,7 @@ public class ShooterController : MonoBehaviour
             }
         }
     }
-    void Shoot(RaycastHit hitInfo)
+    protected virtual void Shoot(RaycastHit hitInfo)
     {
         if (hitInfo.collider != null)
         {
@@ -128,15 +184,26 @@ public class ShooterController : MonoBehaviour
             }
         }
     }
-    void KnifeLaunch(RaycastHit hitInfo)
+    protected virtual void KnifeLaunch(RaycastHit hitInfo)
     {
         Vector3 aimDir = (hitInfo.point - spawnProjectilePos.position).normalized;
         Instantiate(knifeProjectilePrefab, spawnProjectilePos.position, Quaternion.LookRotation(aimDir, Vector3.up));
     }
-    IEnumerator PunchCooldown()
+    protected virtual void SlowFall()
+    {
+        if (rb!=null&& rb.velocity.y < 0f)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, rb.velocity.y * airAttackFallMultiplier, rb.velocity.z);
+        }
+    }
+    protected virtual IEnumerator PunchCooldown()
     {
         yield return new WaitForSeconds(punchCooldown);
 
         canPunch = true;
+    }
+    protected virtual bool IsGrounded()
+    {
+        return Physics.Raycast(transform.position, Vector3.down, groundCheckDistance, groundLayer);
     }
 }
