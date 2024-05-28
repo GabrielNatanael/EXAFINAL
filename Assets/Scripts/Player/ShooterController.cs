@@ -169,6 +169,10 @@ public class ShooterController : MonoBehaviour
             {
                 punchHitInfo.collider.gameObject.GetComponent<Dummy>().DummyPunched();
             }
+            if (punchCollider.isTrigger && punchHitInfo.collider.CompareTag("Enemy"))
+            {
+                punchHitInfo.collider.gameObject.GetComponent<Enemy>().EnemyPunched();
+            }
         }
     }
     protected virtual void Shoot(RaycastHit hitInfo)
@@ -181,6 +185,11 @@ public class ShooterController : MonoBehaviour
             if (hitInfo.collider.CompareTag("Dummy"))
             {
                 hitInfo.collider.gameObject.GetComponent<Dummy>().DummyShot();
+            }
+
+            if (hitInfo.collider.CompareTag("Enemy"))
+            {
+                hitInfo.collider.gameObject.GetComponent<Enemy>().EnemyShoot();
             }
         }
     }

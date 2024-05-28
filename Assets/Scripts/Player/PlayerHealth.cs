@@ -24,7 +24,10 @@ public class PlayerHealth : MonoBehaviour
     {
         health = Mathf.Clamp(health, 0, maxHealth);
         UpdateHealthUI();
-        
+        if(health <= 0)
+        {
+            RestoreHealth(maxHealth);
+        }
     }
     void UpdateHealthUI()
     {
@@ -52,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
         health -= damage;
         lerpTimer = 0f;

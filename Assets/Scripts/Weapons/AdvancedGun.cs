@@ -53,6 +53,14 @@ public class AdvancedGun : ShooterController
                     dummy.DummyShot();
                 }
             }
+            if (hitInfo.collider.CompareTag("Enemy"))
+            {
+                Enemy enemy = hitInfo.collider.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.EnemyShoot();
+                }
+            }
         }
     }
 }
