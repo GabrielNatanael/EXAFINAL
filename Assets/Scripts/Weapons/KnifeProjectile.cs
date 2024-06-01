@@ -29,6 +29,10 @@ public class KnifeProjectile : MonoBehaviour
         {
             other.gameObject.GetComponent<Enemy>().EnemyExplode();
         }
+        if (other.gameObject.CompareTag("FlyingEnemy"))
+        {
+            other.gameObject.GetComponent<FlyingEnemy>().FlyEnemyExplode();
+        }
         Instantiate(particleEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

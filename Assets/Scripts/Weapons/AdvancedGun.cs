@@ -61,6 +61,14 @@ public class AdvancedGun : ShooterController
                     enemy.EnemyShoot();
                 }
             }
+            if (hitInfo.collider.CompareTag("FlyingEnemy"))
+            {
+                FlyingEnemy flyEnemy = hitInfo.collider.GetComponent<FlyingEnemy>();
+                if (flyEnemy != null)
+                {
+                    flyEnemy.FlyEnemyShoot();
+                }
+            }
         }
     }
 }

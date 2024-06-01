@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Dummy
   - Enemy
+  - FlyingEnemy
   layers:
   - Default
   - TransparentFX
