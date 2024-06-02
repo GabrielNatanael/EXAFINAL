@@ -12,6 +12,8 @@ public class PlayerHealth : MonoBehaviour
     [Header("Health Bar UI")]
     [SerializeField] Image frontHealthBar;
     [SerializeField] Image backHealthBar;
+    [Header("SceneLoader")]
+    [SerializeField] GameObject sceneLoader;
 
     private float health;
     private float lerpTimer;
@@ -26,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         UpdateHealthUI();
         if(health <= 0)
         {
-            RestoreHealth(maxHealth);
+            sceneLoader.gameObject.GetComponent<SceneLoader>().LoadScene(3);
         }
     }
     void UpdateHealthUI()

@@ -8,7 +8,9 @@ public class KnifeProjectile : MonoBehaviour
     [Header("Knife Settings")]
     [SerializeField] float knifeSpeed = 10f;
     [SerializeField] Transform particleEffect = null;
-    private Rigidbody rb;
+
+    Rigidbody rb;
+
 
     private void Awake()
     {
@@ -16,7 +18,6 @@ public class KnifeProjectile : MonoBehaviour
     }
     private void Start()
     {
-
         rb.velocity = transform.forward*knifeSpeed;
     }
     private void OnTriggerEnter(Collider other)

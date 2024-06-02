@@ -11,6 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float shootingCooldown = 2f;
+    [SerializeField] Transform playerManualTransform = null;
     [Header("Health")]
     [SerializeField] float maxHealth = 100f;
     [SerializeField] float chipSpeed = 2f;
@@ -36,7 +37,7 @@ public class Enemy : MonoBehaviour
     {
         if(player == null)
         {
-            return;
+            player = playerManualTransform;
         }
 
         health = Mathf.Clamp(health, 0, maxHealth);

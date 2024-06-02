@@ -44,6 +44,7 @@ public class AdvancedGun : ShooterController
         {
             Instantiate(advancedShootEffect, hitInfo.point, Quaternion.identity);
             pistolAnim.SetTrigger("GunFired");
+            audioSource.PlayOneShot(gunSound);
 
             if (hitInfo.collider.CompareTag("Dummy"))
             {

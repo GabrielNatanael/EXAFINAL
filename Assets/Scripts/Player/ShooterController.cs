@@ -39,6 +39,8 @@ public class ShooterController : MonoBehaviour
     [Header("Animators")]
     [SerializeField] protected Animator pistolAnim=null;
     [SerializeField] protected Animator fistAnim=null;
+    [Header("Audio")]
+    [SerializeField] protected AudioClip gunSound = null;
 
     protected bool canPunch;
     protected int punchComboIndex = 0;
@@ -47,6 +49,7 @@ public class ShooterController : MonoBehaviour
 
     protected Collider punchCollider;
     protected Rigidbody rb;
+    protected AudioSource audioSource;
 
     protected enum EquippedWeapon { Fists, pistol, knifeLauncher}
     protected EquippedWeapon currentWeapon = EquippedWeapon.Fists;
@@ -57,6 +60,7 @@ public class ShooterController : MonoBehaviour
         canPunch = true;
         punchCollider = PunchHitBox.GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
+        audioSource = rb.GetComponent<AudioSource>();
     }
     protected virtual void Update()
     {
@@ -185,6 +189,8 @@ public class ShooterController : MonoBehaviour
         {
             Instantiate(ShootEffect, hitInfo.point, Quaternion.identity);
             pistolAnim.SetTrigger("GunFired");
+            audioSource.pitch = Random.Range(0.9f, 1.1f);
+            audioSource.PlayOneShot(gunSound);
 
             if (hitInfo.collider.CompareTag("Dummy"))
             {
