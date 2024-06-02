@@ -1,6 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -19,6 +19,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float airMultiplier;
 
     bool readyToJump = true;
+
+    [Header("Pause Menu")]
+    [SerializeField] GameObject pauseCanvas;
+    [SerializeField] KeyCode pauseKey = KeyCode.Escape;
 
     [Header("Keybinds")]
 
@@ -57,6 +61,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        Time.timeScale = 1.0f;
     }
     private void Update()
     {
@@ -73,6 +78,11 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             rb.drag = 0f;
+        }
+
+        if (Input.GetKeyDown(pauseKey))
+        {
+            pauseCanvas.gameObject.GetComponent<PauseMenu>().Pause();
         }
     }
     private void FixedUpdate()

@@ -802,6 +802,8 @@ MonoBehaviour:
   jumpForce: 8
   jumpCooldown: 0.5
   airMultiplier: 0.1
+  pauseCanvas: {fileID: 0}
+  pauseKey: 27
   jumpKey: 32
   sprintKey: 304
   playerHeight: 2
@@ -840,6 +842,7 @@ MonoBehaviour:
   chipSpeed: 2
   frontHealthBar: {fileID: 0}
   backHealthBar: {fileID: 0}
+  sceneLoader: {fileID: 0}
 --- !u!114 &8195679054354600340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -898,7 +901,6 @@ MonoBehaviour:
   pistolAnim: {fileID: 6335192077554365262}
   fistAnim: {fileID: 2730084508867499048}
   gunSound: {fileID: 8300000, guid: e5fac40db3fa8164a9b96aa68c477d97, type: 3}
-  knifeSound: {fileID: 8300000, guid: 6a30f7e34bad2fe44b3c06be63740e2e, type: 3}
   advancedShootEffect: {fileID: 8982786893660528235, guid: ed8c08a429bd21d4c9189cad7218b65b, type: 3}
   advancedPistolFireRate: 0.2
 --- !u!82 &1554977511572205657
@@ -910,7 +912,7 @@ AudioSource:
   m_GameObject: {fileID: 4080269587081506235}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: eebef896a013f534b927c0cce7d28a30, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 1
