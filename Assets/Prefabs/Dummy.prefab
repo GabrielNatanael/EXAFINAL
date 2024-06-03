@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 8586771606800004972}
   - component: {fileID: 448113055509028434}
   - component: {fileID: 135421999587924176}
+  - component: {fileID: 2226292127717183082}
   m_Layer: 0
   m_Name: Dummy
   m_TagString: Dummy
@@ -231,6 +232,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.65, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2226292127717183082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2918672593541060175}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708db5b3ebf8eff4ab6a703c4871829c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  promptMessage: Welcome to the test area, spawn enemys using "Q" or start the level
+    by opening the door
 --- !u!1 &4543635282281764037
 GameObject:
   m_ObjectHideFlags: 0
