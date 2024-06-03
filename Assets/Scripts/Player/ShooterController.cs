@@ -38,6 +38,8 @@ public class ShooterController : MonoBehaviour
     [SerializeField] protected Animator fistAnim=null;
     [Header("Audio")]
     [SerializeField] protected AudioClip gunSound = null;
+    [SerializeField] protected AudioClip punchSound = null;
+    [SerializeField] protected AudioClip knifeSound = null; 
 
     protected bool canPunch;
     protected int punchComboIndex = 0;
@@ -153,6 +155,9 @@ public class ShooterController : MonoBehaviour
     }
     protected virtual void Punch()
     {
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(punchSound);
+
         RaycastHit punchHitInfo;
 
         canPunch = false;
@@ -207,6 +212,8 @@ public class ShooterController : MonoBehaviour
     }
     protected virtual void KnifeLaunch(RaycastHit hitInfo)
     {
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(knifeSound);
         Vector3 aimDir = (hitInfo.point - spawnProjectilePos.position).normalized;
         Instantiate(knifeProjectilePrefab, spawnProjectilePos.position, Quaternion.LookRotation(aimDir, Vector3.up));
     }

@@ -18,7 +18,10 @@ public class Enemy : MonoBehaviour
     [Header("Health Bar UI")]
     [SerializeField] Image frontHealthBar;
     [SerializeField] Image backHealthBar;
+    [Header("Audio")]
+    [SerializeField] AudioClip hurtSoundEffect = null;
 
+    private AudioSource audioSource;
     private Vector3 initialPos;
     private bool movingRight = true;
     private float nextShotTime;
@@ -29,6 +32,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         initialPos = transform.position;
         nextShotTime = Time.time;
         health = maxHealth;
@@ -132,6 +136,8 @@ public class Enemy : MonoBehaviour
 
     void TakeDamage(float damage)
     {
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(hurtSoundEffect);
         health -= damage;
         lerpTimer = 0f;
         if(health <= 0f)

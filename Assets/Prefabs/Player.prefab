@@ -901,6 +901,8 @@ MonoBehaviour:
   pistolAnim: {fileID: 6335192077554365262}
   fistAnim: {fileID: 2730084508867499048}
   gunSound: {fileID: 8300000, guid: e5fac40db3fa8164a9b96aa68c477d97, type: 3}
+  punchSound: {fileID: 8300000, guid: a3d46e23536ede64ea92509ab67c4589, type: 3}
+  knifeSound: {fileID: 8300000, guid: 6a30f7e34bad2fe44b3c06be63740e2e, type: 3}
   advancedShootEffect: {fileID: 8982786893660528235, guid: ed8c08a429bd21d4c9189cad7218b65b, type: 3}
   advancedPistolFireRate: 0.2
 --- !u!82 &1554977511572205657
